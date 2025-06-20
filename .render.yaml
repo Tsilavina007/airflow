@@ -5,6 +5,8 @@ services:
     dockerfilePath: ./Dockerfile
     plan: free
     startCommand: airflow api-server
+    ports:
+      - 8080
     envVars:
       - key: AIRFLOW__CORE__EXECUTOR
         value: LocalExecutor
