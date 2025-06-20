@@ -12,6 +12,6 @@ RUN chmod +x /start.sh
 
 USER airflow
 
-ENTRYPOINT ["/start.sh"]
-ENTRYPOINT ["airflow"]
-CMD ["api-server"]
+ENTRYPOINT ["./start.sh"]
+# ENTRYPOINT ["airflow"]
+# CMD ["api-server"]
