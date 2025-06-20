@@ -1,0 +1,36 @@
+services:
+  - name: airflow-webserver
+    type: web
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    startCommand: airflow webserver
+    envVars:
+      - key: AIRFLOW__CORE__EXECUTOR
+        value: LocalExecutor
+      - key: AIRFLOW__CORE__LOAD_EXAMPLES
+        value: "False"
+      - key: _AIRFLOW_WWW_USER_USERNAME
+        value: admin
+      - key: _AIRFLOW_WWW_USER_PASSWORD
+        value: admin
+
+  - name: airflow-scheduler
+    type: worker
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    startCommand: airflow scheduler
+    envVars:
+      - key: AIRFLOW__CORE__EXECUTOR
+        value: LocalExecutor
+
+  - name: airflow-dag-processor
+    type: worker
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    startCommand: airflow dag-processor
+    envVars:
+      - key: AIRFLOW__CORE__EXECUTOR
+        value: LocalExecutor
