@@ -4,7 +4,7 @@ services:
     env: docker
     dockerfilePath: ./Dockerfile
     plan: free
-    startCommand: 'aiflow api-server'
+    startCommand: api-server
     ports:
       - 8080
     envVars:
@@ -22,7 +22,7 @@ services:
     env: docker
     dockerfilePath: ./Dockerfile
     plan: free
-    startCommand: 'airflow scheduler'
+    startCommand: scheduler
     envVars:
       - key: AIRFLOW__CORE__EXECUTOR
         value: LocalExecutor
@@ -32,7 +32,7 @@ services:
     env: docker
     dockerfilePath: ./Dockerfile
     plan: free
-    startCommand: 'airflow dag-processor'
+    startCommand: dag-processor
     envVars:
       - key: AIRFLOW__CORE__EXECUTOR
         value: LocalExecutor
