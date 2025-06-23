@@ -2,7 +2,7 @@ FROM apache/airflow:2.9.1-python3.10
 
 ENV AIRFLOW_HOME=/opt/airflow
 
-USER root
+USER airflow
 RUN pip install --no-cache-dir --upgrade pip
 
 # Copy DAGs
