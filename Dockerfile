@@ -1,17 +1,20 @@
-FROM apache/airflow:3.0.2
+FROM apache/airflow:2.9.1-python3.10
 
-USER airflow
-
-COPY requirements.txt /requirements.txt
-RUN pip install --no-cache-dir -r /requirements.txt
+ENV AIRFLOW_HOME=/opt/airflow
 
 USER root
+RUN pip install --no-cache-dir --upgrade pip
 
+# Copy DAGs
+COPY dags/ ${AIRFLOW_HOME}/dags/
+
+# Entry point script
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
-USER airflow
+# Install requirements if needed
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
 
-ENTRYPOINT ["./start.sh"]
-# ENTRYPOINT ["airflow"]
-# CMD ["api-server"]
+USER airflow
+ENTRYPOINT ["/start.sh"]

@@ -1,15 +1,13 @@
 #!/bin/bash
-# Initialise la DB Airflow si ce n'est pas déjà fait
-airflow db migrate
 
-# Crée un utilisateur admin si pas encore fait
+airflow db init
 airflow users create \
-  --username admin \
-  --password admin \
-  --firstname Admin \
-  --lastname User \
-  --role Admin \
-  --email admin@example.com
+    --username admin \
+    --firstname Admin \
+    --lastname User \
+    --role Admin \
+    --email admin@example.com \
+    --password admin
 
-# Démarre le service demandé
-exec airflow "$@"
+# Lancer à la fois le scheduler et le webserver
+airflow scheduler & airflow webserver
